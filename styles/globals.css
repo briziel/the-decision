@@ -33,3 +33,27 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.buttonWrapper {
+  display: flex;
+  gap: 3em;
+}
+
+.button {
+  display: block; 
+  width: 400px;
+  height: 70px;
+  border-radius: 10px;
+  border: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.button.blue {
+  background-color: #0068A8
+}
+
+.button.red {
+  background-color: #A82D00
+}
