@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Confetti from "react-confetti";
 import ReactCanvasConfetti from "react-canvas-confetti";
-import ConfettiExplosion from 'react-confetti-explosion';
+import ConfettiExplosion from "react-confetti-explosion";
 import { useWindowSize } from "react-use";
 import { useEffect, useRef, useState } from "react";
 
@@ -15,14 +15,13 @@ const canvasStyles = {
 };
 
 export default function Home() {
-
   function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
       let c = ca[i];
-      while (c.charAt(0) == ' ') {
+      while (c.charAt(0) == " ") {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
@@ -31,16 +30,16 @@ export default function Home() {
     }
     return "";
   }
-  
+
   const { width, height } = useWindowSize();
   const [clickType, setClickType] = useState();
   const animationInstance = useRef(null);
 
-  useEffect(() =>  {
-    if(getCookie("clicked")) {
-      setClickType(getCookie("clicked"))
+  useEffect(() => {
+    if (getCookie("clicked")) {
+      setClickType(getCookie("clicked"));
     }
-  })
+  });
 
   const makeShot = (particleRatio, opts) => {
     animationInstance &&
@@ -99,7 +98,7 @@ export default function Home() {
   const handleFire = (event, _clickType) => {
     setClickType(_clickType);
     fire(event.pageX, event.pageY, _clickType);
-    document.cookie = `clicked=${_clickType}`; 
+    document.cookie = `clicked=${_clickType}`;
   };
 
   const getInstance = (instance) => {
@@ -136,11 +135,25 @@ export default function Home() {
         <div className="result">
           {clickType ? (
             <>
-              <span className="money">220€</span>
-              <span className="purpose">{clickType === "kickstarter" ? "Für deine Kickstarter-Kampagne":"Für ein Restaurant deiner Wahl*"}</span>
-              {clickType === "essen" && (<span>* Wenn du magst natürlich auch einen Teil für deine Kampagne</span>)}
+              <span className="money">255€</span>
+              <span className="purpose">
+                {clickType === "kickstarter"
+                  ? "Für deine Kickstarter-Kampagne"
+                  : "Für ein Restaurant deiner Wahl*"}
+              </span>
+              {clickType === "essen" && (
+                <span>
+                  * Wenn du magst natürlich auch einen Teil für deine Kampagne
+                </span>
+              )}
               <span className="goldConfetti">
-              <ConfettiExplosion colors={["#B38930", "#FDF452", "#EDC845", "#FBE84F", ]} particleSize={35} floorWidth={1200} floorHeight={900} force={1} />
+                <ConfettiExplosion
+                  colors={["#B38930", "#FDF452", "#EDC845", "#FBE84F"]}
+                  particleSize={35}
+                  floorWidth={1200}
+                  floorHeight={900}
+                  force={1}
+                />
               </span>
             </>
           ) : (
@@ -155,14 +168,14 @@ export default function Home() {
             disabled={clickType === "kickstarter"}
           >
             Essen
-            {clickType === "essen" ? "!": "?"}
+            {clickType === "essen" ? "!" : "?"}
           </button>
           <button
             className={`button red ${clickType === "kickstarter" && "active"}`}
             onClick={(e) => handleFire(e, "kickstarter")}
             disabled={clickType === "essen"}
           >
-            Zocken{clickType === "kickstarter" ? "!": "?"}
+            Zocken{clickType === "kickstarter" ? "!" : "?"}
           </button>
         </div>
       </main>
